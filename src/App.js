@@ -6,8 +6,8 @@ import HomeScreen from './Views/HomeScreen';
 import { Route } from 'react-router-dom';
 
 
-{/*Attributions:
-  Help from Maeva NAP and Forrest's walkthroughs on YouTube*/}
+/*Attributions:
+Help from Maeva NAP and Forrest's walkthroughs on YouTube*/
 
 
 class BooksApp extends React.Component {
@@ -29,9 +29,7 @@ moveShelf = (book, shelf) => {
   BooksAPI.update(book, shelf).then(() => {
     BooksAPI.getAll().then((books) => {
       this.setState({ books: books })
-  })
-  //setState so you will not have to update page for the proper shelves to appear
-
+    })
   })
 }
 

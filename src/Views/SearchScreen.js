@@ -2,28 +2,28 @@ import React, {Component} from "react";
 import { Link } from 'react-router-dom';
 import * as BooksAPI from '../BooksAPI'
 import Book from '../Components/Book';
-import RecBooks from '../Components/RecBooks';
+
 
 class SearchScreen extends Component {
-  constructor(props) {
+constructor(props) {
     super(props);
     this.state = {
-    query: '',
-    searchedBooks: []
+      query: '',
+      searchedBooks: []
     }
   }
+
 updateQuery = (query) => {
   this.setState({
     query: query
   })
   this.updateSearchedBooks(query);
-
 }
 
 updateSearchedBooks = (query) => {
   if (query) {
     BooksAPI.search(query).then((searchedBooks) => {
-      if (searchedBooks.error) {
+      if(searchedBooks.error) {
         this.setState({ searchedBooks: [] });
       } else {
         this.setState({ searchedBooks: searchedBooks });
@@ -54,26 +54,27 @@ updateSearchedBooks = (query) => {
     </div>
     <div className="search-books-results">
       <ol className="books-grid">
-        {this.state.searchedBooks.map(searchedBook => {
-            let shelf = 'none ';
-
-            this.props.books.map(book => {
+        {
+          this.state.searchedBooks.map(searchedBook => {
+            let shelf = 'none';
+            this.props.books.forEach(book => (
               book.id === searchedBook.id ?
               shelf = book.shelf : ''
-            });
+
+            ));
             return (
               <li key={searchedBook.id}>
-              <Book
-                book={searchedBook}
-                moveShelf={this.props.moveShelf}
-                currentShelf = {shelf}
-                />
-                </li>
-              );
+                <Book
+                  book={searchedBook}
+                  moveShelf={this.props.moveShelf}
+                  currentShelf = {shelf}
+                  />
+              </li>
+          );
         })
       }
 
-            {this.state.searchedBooks.length === 0 && <RecBooks />}
+            {this.state.searchedBooks.length === 0 && <div className='recommendedBooks'>What would you like to read today?</div>}
       </ol>
 
     </div>

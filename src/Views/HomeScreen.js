@@ -15,18 +15,17 @@ class HomeScreen extends Component {
               <h2 className="bookshelf-title">Currently Reading</h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
-                {
-                  this.props.books.filter(book => book.shelf === 'currentlyReading')
+                {this.props.books.filter(book => book.shelf === 'currentlyReading')
                   .map( book => (
-                    <li>
-                      <Book book={book}
-                        key={book.id}
+                    <li key={book.id}>
+                      <Book
+                        book={book}
                         moveShelf={this.props.moveShelf}
                         currentShelf='currentlyReading'
-                      />
-                    </li>
-                  ))
-                }
+                        />
+                      </li>
+                    ))
+                  }
                 </ol>
               </div>
             </div>
@@ -36,9 +35,8 @@ class HomeScreen extends Component {
                 <ol className="books-grid">
                 {
                   this.props.books.filter(book => book.shelf === 'wantToRead').map(book => (
-                    <li>
+                    <li key={book.id}>
                       <Book
-                      key={book.id}
                         book={book}
                         moveShelf={this.props.moveShelf}
                         currentShelf='wantToRead'
@@ -56,12 +54,13 @@ class HomeScreen extends Component {
                 <ol className="books-grid">
                 {
                   this.props.books.filter(book => book.shelf === 'read').map(book => (
-                      <Book key={book.id}
+                    <li key={book.id}>
+                      <Book
                         book={book}
                         moveShelf={this.props.moveShelf}
                         currentShelf='read'
                        />
-
+                    </li>
                   ))
                 }
                 </ol>
